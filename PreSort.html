@@ -4,7 +4,7 @@
  
 <title>A jQuery Drag-and-Drop Number Cards Game</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-<link rel="stylesheet" type="text/css" href="qsort.css">
+<link rel="stylesheet" type="text/css" href="presort.css">
  
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
@@ -46,8 +46,8 @@ function init() {
   }
  
   // Create the card slots
-  var words = [ 'most agree', 'agree', 'agree', 'neutral', 'neutral', 'neutral', 'neutral', 'disagree', 'disagree', 'most disagree' ];
-  for ( var i=1; i<=10; i++ ) {
+  var words = [ 'agree', 'neutral', 'disagree' ];
+  for ( var i=1; i<=3; i++ ) {
     $('<div>' + words[i-1] + '</div>').data( 'number', i ).appendTo( '#cardSlots' ).droppable( {
       accept: '#cardPile div',
       hoverClass: 'hovered',
@@ -67,11 +67,14 @@ function handleCardDrop( event, ui ) {
   // again
  
 
-    ui.draggable.addClass( 'correct' );
+    ui.draggable.addClass( 'Complete' );
     //ui.draggable.draggable( 'disable' );
     //$(this).droppable( 'disable' );
     ui.draggable.position( { of: $(this), my: 'left top', at: 'left top' } );
     ui.draggable.draggable( 'option', 'revert', false );
+  //  $(ui.draggable).data('codeNumber',slotNumber); 
+  //  $( "span:first" ).text(slotNumber);
+  //  $( "span" ).eq(1).text(cardNumber);
   //  correctCards++;
 
    
@@ -101,7 +104,9 @@ function handleCardDrop( event, ui ) {
   <div id="cardPile"> </div>
   <div id="cardSlots"> </div>
 
- 
+  <div id="result">
+  The result slotnumber is <span> ? </span>; the cardnumber is <span> ? </span>; and the code is <span> ? </span>.
+</div>
   <div id="successMessage">
     <h2>You did it!</h2>
     <button onclick="init()">Play Again</button>
